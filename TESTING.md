@@ -1,5 +1,13 @@
 # Integration Testing Strategy
 
+## Architecture Context
+The initial repository shape was too narrow because it mostly showed `observability` and `testing`. That can be acceptable for an exercise, but it makes the backend architecture feel incomplete. The corrected structure adds `domain`, `contracts`, `usecases`, `services`, `handlers/http`, `config`, `infrastructure`, and `app` so the testing strategy now maps to realistic boundaries.
+
+This matters because test levels should align with actual layers:
+- unit tests target `domain` and small `usecases`
+- integration tests target `infrastructure` adapters and repositories
+- end-to-end tests target `handlers/http` through the application wiring in `app`
+
 ## The Core Problem
 The current tests over-use mocks, so they verify that code calls mocked methods, not that the system actually works. That misses bugs in:
 - SQL generation

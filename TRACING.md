@@ -1,5 +1,20 @@
 # Tracing Design
 
+## Architecture Context
+
+The original submission focused mainly on `observability` and `testing`, which made the repository look too thin and exercise-oriented. To make the design read like a real backend service, the corrected structure now includes:
+
+- `domain` for core business entities
+- `contracts` for dependency boundaries
+- `usecases` for application orchestration
+- `services` for application-facing coordination
+- `handlers/http` for transport entry points
+- `config` for runtime configuration
+- `infrastructure` for concrete adapters
+- `app` for composition and dependency wiring
+
+That structure gives tracing a clearer place in the system: transport starts traces, services/usecases orchestrate spans, and infrastructure propagates them to dependencies.
+
 ## Decision
 
 ### 1. Which option for usecases? Why?
